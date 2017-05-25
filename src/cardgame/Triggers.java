@@ -67,8 +67,9 @@ public class Triggers {
                 if ((p.filter & event) != 0) {
                     triggerableActions.push(p);
                 }
+            } else {
+                p.delay--;
             }
-            p.delay--;
         }
 
         //execute last-inserted-first
