@@ -6,7 +6,6 @@
 package cardgame;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.EnumMap;
 import java.util.Iterator;
@@ -262,16 +261,6 @@ public class DecoratedPlayer implements Player, Damageable {
         decorated.inflictDamage(c, dmg);
     }
     
-    
-    
-    public List<Card> getExiledCreatures() {
-        return decorated.getExiledCreatures();
-    }
-
-    public Card retrieveExiledCard(Card c) {
-        return decorated.retrieveExiledCard(c);
-    }
-    
-    
+ 
 
 }

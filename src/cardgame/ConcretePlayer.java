@@ -113,16 +113,4 @@ public class ConcretePlayer implements Player {
         enchantments.remove(c);
     }
 
-    private final List<Card> exiledCreatures = new ArrayList<>();
-
-    @Override
-    public List<Card> getExiledCreatures() {
-        return exiledCreatures;
-    }
-
-    @Override
-    public Card retrieveExiledCard(Card c) {
-        int index = exiledCreatures.indexOf(c);
-        return exiledCreatures.remove(index);
-    }
 }

@@ -36,6 +36,4 @@ public interface Player {
     void destroy(Creature c);
     List<Enchantment> getEnchantments();
     void destroy(Enchantment e);
-    List<Card> getExiledCreatures();
-    Card retrieveExiledCard(Card c);
 }

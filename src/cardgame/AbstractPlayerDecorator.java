@@ -54,13 +54,4 @@ public class AbstractPlayerDecorator implements PlayerDecorator {
     public List<Enchantment> getEnchantments() { return decorated.getEnchantments(); }
     public void destroy(Enchantment e) { decorated.destroy(e); }
 
-    @Override
-    public List<Card> getExiledCreatures() {
-        return decorated.getExiledCreatures();
-    }
-
-    @Override
-    public Card retrieveExiledCard(Card c) {
-        return decorated.retrieveExiledCard(c);
-    }
 }

@@ -30,6 +30,7 @@ public class ArtfulManeuver extends AbstractCard {
 
     static private StaticInitializer initializer
             = new StaticInitializer(cardName, new CardConstructor() {
+                @Override
                 public Card create() {
                     return new ArtfulManeuver();
                 }
@@ -43,17 +44,16 @@ public class ArtfulManeuver extends AbstractCard {
             super(p, c);
         }
 
+        @Override
         public void play() {
-            
+
             super.play();
         }
 
+        @Override
         public void resolve() {
 
             //la carta deve essere esiliata 
-            
-            
-            
             TriggerAction rebound = new TriggerAction() {
                 @Override
                 public void execute(Object args) {
@@ -69,6 +69,7 @@ public class ArtfulManeuver extends AbstractCard {
 
                     final ArtfulManeuverDecorator decorator = new ArtfulManeuverDecorator();
                     TriggerAction action = new TriggerAction() {
+                        @Override
                         public void execute(Object arg) {
                             if (!target.isRemoved()) {
                                 System.out.println("Triggered removal of " + cardName + " from " + target);
@@ -87,33 +88,9 @@ public class ArtfulManeuver extends AbstractCard {
             };
             System.out.println(cardName + " exiled. " + target.name() + " will be buffed during the next turn");
             CardGame.instance.getTriggers().register(Triggers.UNTAP_FILTER, rebound, 1);
-//            if (target == null) {
-//                return;
-//            }
-//
-//            if (target.isRemoved()) {
-//                System.out.println("Attaching " + cardName + " to removed creature");
-//                return;
-//            }
-//
-//            final ArtfulManeuverDecorator decorator = new ArtfulManeuverDecorator();
-//            TriggerAction action = new TriggerAction() {
-//                public void execute(Object arg) {
-//                    if (!target.isRemoved()) {
-//                        System.out.println("Triggered removal of " + cardName + " from " + target);
-//                        target.removeDecorator(decorator);
-//                    } else {
-//                        System.out.println("Triggered dangling removal of " + cardName + " from removed target. Odd should have been invalidated!");
-//                    }
-//                }
-//            };
-//            System.out.println("Ataching " + cardName + " to " + target.name() + " and registering end of turn trigger");
-//            CardGame.instance.getTriggers().register(Triggers.END_FILTER, action);
-//
-//            decorator.setRemoveAction(action);
-//            target.addDecorator(decorator);
         }
 
+        @Override
         public void pickTarget(DecoratedPlayer p) {
             System.out.println(p.name() + ": choose target for " + cardName);
 
@@ -146,6 +123,7 @@ public class ArtfulManeuver extends AbstractCard {
             }
         }
 
+        @Override
         public String toString() {
             if (target == null) {
                 return super.toString() + " (no target)";
@@ -158,6 +136,7 @@ public class ArtfulManeuver extends AbstractCard {
 
     }
 
+    @Override
     public Effect getEffect(DecoratedPlayer owner) {
         return new ArtfulManeuverEffect(owner, this);
     }
@@ -170,6 +149,7 @@ public class ArtfulManeuver extends AbstractCard {
             action = a;
         }
 
+        @Override
         public void remove() {
             System.out.println("Removing " + cardName + " and deregistering end of turn trigger");
             if (action != null) {
@@ -178,39 +158,42 @@ public class ArtfulManeuver extends AbstractCard {
             super.remove();
         }
 
+        @Override
         public int getPower() {
             return decorated.getPower() + 2;
         }
 
+        @Override
         public int getToughness() {
             return decorated.getToughness() + 2;
         }
     }
 
+    @Override
     public String name() {
         return cardName;
     }
 
+    @Override
     public String type() {
         return "Instant";
     }
 
+    @Override
     public String ruleText() {
         return "Target creature gets +2/+2 until end of turn"
                 + "\nRebound: if you cast this spell from your hand, exile it as it resolves. At the beginning "
                 + "of the next upkeep, you may cast this card from exile without paying its mana cost";
     }
 
+    @Override
     public String toString() {
         return cardName + "[" + ruleText() + "]";
     }
 
+    @Override
     public boolean isInstant() {
         return true;
-    }
-
-    public void exile() {
-
     }
 
 }
